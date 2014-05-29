@@ -8,7 +8,8 @@ To run this project, you need to have installed `Apache Tomcat` websever in your
 
    	$ sudo apt-get install tomcat7
   
-Luego deberá agregar el archivo `Bajavista.war` de la carpeta `dist` al administrador de aplicaciones de Apache Tomcat, el cual se puede localizar en `http://localhost:8080/manager/html`
+Then you must add the file `Bajavista.war` in the folder `dist` administrator applications Apache Tomcat, which can be located in `http://localhost:8080/manager/html`  
+
 
 Datebase configuration
 ------------------
