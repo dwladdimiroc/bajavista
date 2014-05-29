@@ -6,7 +6,7 @@ Apache Tomcat 7 Installation
 ------------------
 To run this project, you need to have installed `Apache Tomcat` websever in your `Ubuntu`. If you do not have, you can install it with the following command.
 
-  $ sudo apt-get install tomcat7
+   	$ sudo apt-get install tomcat7
   
 Luego deberá agregar el archivo `Bajavista.war` de la carpeta `dist` al administrador de aplicaciones de Apache Tomcat, el cual se puede localizar en `http://localhost:8080/manager/html`
 
