@@ -68,12 +68,13 @@ public class Buscador {
         searcherNONES.search(q, collectorNONES);
 
         ScoreDoc[] hits = collector.topDocs().scoreDocs;
-        ScoreDoc[] hitsNONES = collectorNONES.topDocs().scoreDocs;
+        // ScoreDoc[] hitsNONES = collectorNONES.topDocs().scoreDocs;
 
         // 4. Display results
         for (int i = 0; i < hits.length; ++i) {
             int docId = hits[i].doc;
             Document d = searcher.doc(docId);
+            System.out.println(d.get("contenido"));
             info = new Informacion(d.get("es"), d.get("datetime"), d.get("contenido"));
             listaInfo.add(info);
         }
@@ -84,9 +85,22 @@ public class Buscador {
          Document d = searcherNONES.doc(docId);
          System.out.println((i + 1) + ". " + d.get("es") + "\t" + d.get("contenido"));
          }*/
+        
         reader.close();
         readerNONES.close();
 
+        return listaInfo;
+    }
+    
+    public ArrayList<Informacion> filtrarContenido(ArrayList<Informacion> listaInfo) {
+        for(int i=0; i< listaInfo.size() ; i++){
+            for(int j=0; j< (listaInfo.size()-1); j++){
+                if(listaInfo.get(i).getTexto().compareTo(listaInfo.get(j).getTexto()) == 0){
+                    listaInfo.remove(j);
+                }
+            }
+        }
+        
         return listaInfo;
     }
 }

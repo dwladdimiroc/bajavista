@@ -56,6 +56,7 @@
                 <%
                     Buscador buscador = new Buscador(indexES, indexNONES);
                     ArrayList<Informacion> listaResultados = buscador.buscarContenido(busqueda);
+                    listaResultados = buscador.filtrarContenido(listaResultados);
 
                     if (listaResultados != null) {
                         for (int i = 0; i < listaResultados.size(); i++) {

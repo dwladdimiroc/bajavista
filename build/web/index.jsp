@@ -1,10 +1,19 @@
+<%@page import="java.io.File"%>
 <%@page import="bajavista.IndiceInvertido"%>
+
 <%
     String indexES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileES";
     String indexNONES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileNONES";
-    IndiceInvertido indexInv = new IndiceInvertido(indexES, indexNONES);
-    indexInv.crearIndiceInvertido();
+    File file = new File(indexES);
+        
+        if(file.isDirectory()){
+            if(file.list().length <= 0){
+                IndiceInvertido indexInv = new IndiceInvertido(indexES, indexNONES);
+                indexInv.crearIndiceInvertido();
+            }
+        }
 %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
