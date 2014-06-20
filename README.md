@@ -17,4 +17,4 @@ In this program is used with `MySQL` database, so you must configure the file `C
 
 Bajavista Search Web Running
 ------------------
-Enter the URL `http://localhost:8080/Bajavista` and you'll get your home search indexed data !
+Enter the URL `http://localhost:8080/Bajavista` and you'll get your home search indexed data !!
