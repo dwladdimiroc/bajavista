@@ -2,16 +2,20 @@
 <%@page import="bajavista.IndiceInvertido"%>
 
 <%
-    String indexES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileES";
-    String indexNONES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileNONES";
+    String indexES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFile";
+    //String indexNONES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileNONES";
     File file = new File(indexES);
-        
-        if(file.isDirectory()){
-            if(file.list().length <= 0){
-                IndiceInvertido indexInv = new IndiceInvertido(indexES, indexNONES);
-                indexInv.crearIndiceInvertido();
-            }
+
+    if (file.isDirectory()) {
+        if (file.list().length <= 0) {
+            IndiceInvertido indexInv = new IndiceInvertido(indexES);
+            indexInv.crearIndiceInvertido();
+            System.out.print("Index create");
         }
+    }
+//    IndiceInvertido indexInv = new IndiceInvertido(indexES);
+//    indexInv.crearIndiceInvertido();
+//    System.out.println("Index create");
 %>
 
 <!DOCTYPE html>
@@ -46,7 +50,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.jsp">Buscar</a></li>
-                        <li><a href="pages/actualizar.jsp">Actualizar</a></li>
+                        <li><a href="#">Actualizar</a></li>
                     </ul>
                 </div>
             </div>
@@ -59,12 +63,16 @@
                 <h3 class="text-center">
                     <img src="img/logo.png" alt="" title="" border="0" />
                 </h3>
-                <form>
-                    <input title="Ingrese una búsqueda" type="text" name="buscador" id="buscador" pattern="[a-zA-Z0-9]+" required/><br/>
-                    <input type="submit" value="Buscar" name="buscar" 
-                           onclick="document.forms[0].action = 'pages/busqueda.jsp';
-                                   return true;" />
-                </form>      
+                <form id="search" action="pages/busqueda.jsp" method="get">
+                    <input title="Ingrese una búsqueda" type="text" name="buscador" id="buscador" pattern="[a-zA-Z0-9]+" required /><br/>
+                    <input value="Consultar" type="submit" />
+                </form>
+                Seleccione tipo de preferencia en la búsqueda:
+                <select name="preferencia" id="preferencia" form="search">
+                    <option value="tiempo">Tiempo</option>
+                    <option value="influencia">Influencia</option>
+                    <option value="objetividad">Objetividad</option>
+                </select> 
             </div>
         </div>
 

@@ -6,6 +6,8 @@
 package conexionmysql;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +18,7 @@ public class ConexionBD {
     /**
      * Parametros de conexion
      */
-    static String bd = "Tweet";
+    static String bd = "Bajavista";
     static String login = "root";
     static String password = "danyrex";
     static String url = "jdbc:mysql://localhost/" + bd;
@@ -35,7 +37,7 @@ public class ConexionBD {
             connection = DriverManager.getConnection(url, login, password);
 
             if (connection != null) {
-                System.out.println("Conexión a base de datos " + bd + " OK\n");
+                //System.out.println("Conexión a base de datos " + bd + " OK");
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -53,7 +55,11 @@ public class ConexionBD {
         return connection;
     }
 
-    public void desconectar() {
-        connection = null;
+    public void desconectar(){
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

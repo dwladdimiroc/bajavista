@@ -4,14 +4,15 @@
     Author     : daniel
 --%>
 
-<%@page import="bajavista.Informacion"%>
+<%@page import="eda.Informacion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bajavista.Buscador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String busqueda = request.getParameter("buscador");
-    String indexES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileES";
-    String indexNONES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileNONES";
+    String preferencia = request.getParameter("preferencia");
+    String indexES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFile";
+    //String indexNONES = "/home/daniel/Documentos/Programación/Java/Tecnologías de la web/Bajavista/index/IndexFileNONES";
 %>
 
 <!DOCTYPE html>
@@ -54,13 +55,15 @@
         <div class="container">
             <div class="text-center">
                 <%
-                    Buscador buscador = new Buscador(indexES, indexNONES);
+                    Buscador buscador = new Buscador(indexES);
                     ArrayList<Informacion> listaResultados = buscador.buscarContenido(busqueda);
                     listaResultados = buscador.filtrarContenido(listaResultados);
+                    listaResultados = buscador.rankingContenido(listaResultados, preferencia);
+                    listaResultados = buscador.ordenarContenido(listaResultados);
 
                     if (listaResultados != null) {
                         for (int i = 0; i < listaResultados.size(); i++) {
-                            out.print(listaResultados.get(i).getTexto());
+                            out.print("Ranking:" + listaResultados.get(i).getRanking() + "Texto: " + listaResultados.get(i).getText());
                 %>         <br><br>
                 <%
                         }
