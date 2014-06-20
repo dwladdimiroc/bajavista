@@ -1,0 +1,18 @@
+The structure of the database is conditioned as follows
+
+	idUser|timestamp|tweet|objective|subjective|positive|negative|need
+
+An example of the data is:
+
+	38916|61227788400320|rt @equipo_sp: sortearemos dos invitaciones para un momento historico:el cambio de mando. envíanos por dm la mayor cantidad de apellidos ... |0.014099881774248781|0.9859001182257511|0.411976402785255|0.588023597214745|0
+
+Glossary
+
+	idUser: ID of the user who tweeted
+	timestamp: Timestamp of the tweet
+	tweet: Text of the tweet
+	objective: Percentage of objectivity as classifier mallet
+	subjective: Percentage of subjectivity as classifier mallet
+	positive: Percentage of positivity as classifier mallet
+	negative: Percentage of negativity as classifier mallet
+	need: Number of words related to need in the tweet
