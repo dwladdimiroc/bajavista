@@ -113,6 +113,8 @@ public class Buscador {
 
     public ArrayList<Informacion> rankingContenido(ArrayList<Informacion> listaInfo, String preferencia) {
 
+        double P = 0.7;
+        
         double Pn;
         double n;
 
@@ -127,6 +129,11 @@ public class Buscador {
         double t;
 
         long tFinal = calcularTimeFinal();
+        
+        double Pni = 0.3;
+        double ni;
+        int niMax = calcularNeedMaxima();
+        System.out.println("niMax" + niMax);
 
 //        System.out.println("iMax: "+iMax);
 //        System.out.println("rMax: "+rMax);
@@ -154,8 +161,8 @@ public class Buscador {
             //System.out.println("Objetividad");
             
             Pn = 0.8;
-            Pi = 0.19;
-            Pt = 0.01;
+            Pi = 0.1;
+            Pt = 0.1;
         }
 
         for (int j = 0; j < listaInfo.size(); j++) {
@@ -182,10 +189,13 @@ public class Buscador {
 
             //Rankear valores del tiempo
             t = listaInfo.get(j).getTimestamp() / tFinal;
+            
+            //Rankear necesidad del tweet
+            ni = (double) listaInfo.get(j).getNeed() / (double) niMax;
 
-            ranking = Pn * n + Pi * i + Pt * t;
+            ranking = P*(Pn * n + Pi * i + Pt * t) + Pni*ni;
 
-            //System.out.println("ID: "+j+" Ranking: "+ranking);
+            System.out.println("ID: "+j+" Ranking: "+ranking);
             listaInfo.get(j).setRanking(ranking);
         }
 
@@ -236,6 +246,27 @@ public class Buscador {
         db.desconectar();
 
         return influenciaMax;
+    }
+    
+    private int calcularNeedMaxima() {
+        int needMax = 0;
+
+        ConexionBD db = new ConexionBD();
+        try {
+            try (PreparedStatement consulta = db.getConnection().prepareStatement("SELECT MAX(need) AS need  FROM Tweet");
+                    ResultSet res = consulta.executeQuery()) {
+                while (res.next()) {
+                    needMax = Integer.parseInt(res.getString("need"));
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.print("No se pudo consultar a la base de datos respecto a la influencia máxima\n" + e);
+        }
+        db.desconectar();
+
+        return needMax;
     }
 
     private int rankingUser(int id) {

@@ -40,11 +40,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="#">Bajavista</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="../index.jsp">Buscar</a></li>
-                        <li><a href="pages/actualizar.jsp">Actualizar</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -62,11 +62,25 @@
                     listaResultados = buscador.ordenarContenido(listaResultados);
 
                     if (listaResultados != null) {
+                %>
+                <table class="table table-hover">
+                    <tr>
+                        <td>#</td>
+                        <td>Tweet</td>
+                        <td>Ranking</td>
+                    </tr>
+                    <%
                         for (int i = 0; i < listaResultados.size(); i++) {
-                            out.print("Ranking:" + listaResultados.get(i).getRanking() + "Texto: " + listaResultados.get(i).getText());
-                %>         <br><br>
-                <%
+                    %><tr>
+                        <td><%out.print(i+1);%></td>
+                        <td><%out.print(listaResultados.get(i).getText());%></td>
+                        <td><%out.print(listaResultados.get(i).getRanking());%> </td>
+                    </tr>
+                    <%
                         }
+                    %>
+                </table>
+                <%
                     } else {
                         out.print("No existen coincidencias...");
                     }
