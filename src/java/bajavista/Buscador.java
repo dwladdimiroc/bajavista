@@ -96,7 +96,7 @@ public class Buscador {
         return listaInfo;
     }
 
-    //Limpieza  tweet
+    //5. Clear tweets
     public ArrayList<Informacion> filtrarContenido(ArrayList<Informacion> listaInfo) {
         for (int i = 0; i < listaInfo.size(); i++) {
             for (int j = 1; j < listaInfo.size(); j++) {
